@@ -1,24 +1,8 @@
-const platformEl = document.getElementById("platform");
-const platformNoteEl = document.getElementById("platform-note");
 const buttons = document.querySelectorAll(".js-add-contact");
 
 const ua = navigator.userAgent || "";
 const isIOS = /iphone|ipad|ipod/i.test(ua);
 const isAndroid = /android/i.test(ua);
-
-if (isIOS) {
-  platformEl.textContent = "Пристрій: iOS";
-  platformNoteEl.textContent =
-    "На iOS відкриється картка контакту. Натисни «Додати», щоб зберегти.";
-} else if (isAndroid) {
-  platformEl.textContent = "Пристрій: Android";
-  platformNoteEl.textContent =
-    "На Android відкриється файл контакту. Підтверди додавання.";
-} else {
-  platformEl.textContent = "Пристрій: Desktop";
-  platformNoteEl.textContent =
-    "Збережи файл і відкрий його на телефоні, щоб додати контакт.";
-}
 
 const buildVCard = ({ name, phone, note }) => {
   const lines = [
