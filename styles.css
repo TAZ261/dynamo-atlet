@@ -6,6 +6,13 @@
   --blue-deep: #123a8f;
   --orange: #f2a332;
   --orange-deep: #8a4605;
+  --instagram-1: #f58529;
+  --instagram-2: #dd2a7b;
+  --instagram-3: #8134af;
+  --contact: #2fd06f;
+  --contact-deep: #1f8f4f;
+  --call: #ffb347;
+  --call-deep: #ff8c2b;
   --line: rgba(255, 255, 255, 0.12);
   --glass: rgba(10, 15, 25, 0.75);
   --shadow: 0 20px 40px rgba(2, 6, 16, 0.45);
@@ -183,12 +190,50 @@ h1 {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   font-size: 15px;
+  text-align: center;
 }
 
 .btn--solid {
   background: linear-gradient(120deg, var(--blue), var(--orange));
   color: #0b0e14;
   box-shadow: 0 16px 30px rgba(25, 40, 80, 0.35);
+}
+
+.btn--instagram {
+  background: linear-gradient(120deg, var(--instagram-1), var(--instagram-2), var(--instagram-3));
+  color: #0b0e14;
+  box-shadow: 0 16px 30px rgba(80, 20, 60, 0.35);
+}
+
+.btn--contact {
+  background: linear-gradient(120deg, var(--contact), var(--contact-deep));
+  color: #0b0e14;
+  box-shadow: 0 16px 28px rgba(20, 80, 50, 0.35);
+}
+
+.btn--call {
+  background: linear-gradient(120deg, var(--call), var(--call-deep));
+  color: #1b0f04;
+  box-shadow: 0 16px 28px rgba(120, 70, 10, 0.35);
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn__label,
+.btn__value {
+  display: block;
+  line-height: 1.1;
+}
+
+.btn__label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn__value {
+  font-size: 14px;
+  letter-spacing: 0.6px;
 }
 
 .card--fencing .btn--solid {
@@ -269,7 +314,7 @@ h1 {
 
 @media (max-width: 640px) {
   .shell {
-    padding: 32px 16px 48px;
+    padding: 32px 12px 52px;
   }
 
   .hero__brand {
@@ -283,16 +328,16 @@ h1 {
 
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 14px;
   }
 
   .card {
-    padding: 18px 14px;
+    padding: 20px 16px;
     min-height: auto;
   }
 
   .card__title {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .card__subtitle {
@@ -308,8 +353,8 @@ h1 {
   }
 
   .btn {
-    font-size: 12px;
-    padding: 9px 12px;
+    font-size: 13px;
+    padding: 10px 12px;
   }
 }
 
