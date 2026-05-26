@@ -2,7 +2,9 @@ const platformNoteEl = document.getElementById("platform-note");
 const buttons = document.querySelectorAll(".js-add-contact");
 
 const ua = navigator.userAgent || "";
-const isIOS = /iphone|ipad|ipod/i.test(ua);
+const isIOS =
+  /iphone|ipad|ipod/i.test(ua) ||
+  (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 const isAndroid = /android/i.test(ua);
 
 if (platformNoteEl) {
@@ -42,19 +44,20 @@ const fileSafe = (value) => {
 };
 
 const triggerDownload = (fileName, content) => {
+  if (isIOS) {
+    const dataUri = `data:text/vcard;charset=utf-8,${encodeURIComponent(content)}`;
+    window.location.href = dataUri;
+    return;
+  }
+
   const blob = new Blob([content], { type: "text/vcard" });
   const url = URL.createObjectURL(blob);
-
-  if (isIOS) {
-    window.location.href = url;
-  } else {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  }
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
 
   setTimeout(() => URL.revokeObjectURL(url), 1500);
 };
