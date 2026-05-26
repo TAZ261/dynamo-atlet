@@ -4,13 +4,13 @@ const ua = navigator.userAgent || "";
 const isIOS = /iphone|ipad|ipod/i.test(ua);
 const isAndroid = /android/i.test(ua);
 
-const buildVCard = ({ name, phone, note }) => {
+const buildVCard = ({ name, phones, note }) => {
   const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
     `FN:${name}`,
     `N:${name};;;;`,
-    `TEL;TYPE=CELL:${phone}`,
+    ...phones.map((phone) => `TEL;TYPE=CELL:${phone}`),
     `NOTE:${note}`,
     "END:VCARD",
   ];
@@ -48,9 +48,13 @@ const triggerDownload = (fileName, content) => {
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const name = button.dataset.name || "Динамо";
-    const phone = button.dataset.phone || "";
+    const phoneRaw = button.dataset.phone || "";
+    const phones = phoneRaw
+      .split(",")
+      .map((phone) => phone.trim())
+      .filter(Boolean);
     const note = button.dataset.note || "";
-    const vCard = buildVCard({ name, phone, note });
+    const vCard = buildVCard({ name, phones, note });
     const fileName = `${fileSafe(name)}.vcf`;
     triggerDownload(fileName, vCard);
   });
