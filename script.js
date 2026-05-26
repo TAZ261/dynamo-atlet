@@ -1,8 +1,22 @@
+const platformNoteEl = document.getElementById("platform-note");
 const buttons = document.querySelectorAll(".js-add-contact");
 
 const ua = navigator.userAgent || "";
 const isIOS = /iphone|ipad|ipod/i.test(ua);
 const isAndroid = /android/i.test(ua);
+
+if (platformNoteEl) {
+  if (isIOS) {
+    platformNoteEl.textContent =
+      "На iPhone відкриється картка контакту. Натисни «Додати», щоб зберегти.";
+  } else if (isAndroid) {
+    platformNoteEl.textContent =
+      "На Android завантажиться файл контакту. Відкрий його і підтверди додавання.";
+  } else {
+    platformNoteEl.textContent =
+      "Збережи файл і відкрий його на телефоні, щоб додати контакт.";
+  }
+}
 
 const buildVCard = ({ name, phones, note }) => {
   const lines = [
